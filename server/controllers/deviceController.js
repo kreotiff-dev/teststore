@@ -10,7 +10,7 @@ class DeviceController {
             const {img} = req.files
             let fileName = uuid.v4() + ".jpg"
             await img.mv(path.resolve(__dirname, '..', 'static', fileName))
-            const device = await Device.create({name, price, brandId, typeId, img: fileName})
+            const device = await Device.creat({name, price, brandId, typeId, img: fileName})
 
             if (info) {
                 info = JSON.parse(info)
@@ -22,12 +22,10 @@ class DeviceController {
                     })
                 )
             }
-
             return res.json(device)
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
-
     }
 
     async getAll(req, res) {

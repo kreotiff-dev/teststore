@@ -7,6 +7,10 @@ const fileUpload = require('express-fileupload')
 const router = require('./routes/index')
 const errorHandler = require('./middleware/ErrorHandlingMiddleware')
 const path = require('path')
+const swaggerJsDoc = require('swagger-jsdoc')
+const swaggerUI = require('swagger-ui-express')
+const {Brand} = require("./models/models");
+
 
 const PORT = process.env.PORT || 5000
 
@@ -29,6 +33,37 @@ const start = async () => {
         console.log(e)
     }
 }
+
+
+
+//Swagger https://swagger.io/specification/#infoObject
+const swaggerOptions = {
+    swaggerDefinition: {
+        info: {
+            title: "Документация по нашему Test Store API",
+            description: 'API нашего тестового магазина',
+            termsOfService: 'https://example.com/terms/',
+            contact: {
+                name: "Eugene Sychev",
+                url: "http://localhost:5000",
+                email: "support@example.com"
+            },
+            license: {
+                name: "Apache 2.0",
+                url: "https://www.apache.org/licenses/LICENSE-2.0.html"
+            },
+            version: "1.0.0",
+            servers: {
+                    url: "http://localhost:5000",
+                    description: "Dev server"
+            }
+        }
+    },
+    apis: ["./routes/*.js"]
+}
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 
 start()
