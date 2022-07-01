@@ -21,7 +21,7 @@ app.use(express.static(path.resolve(__dirname, 'static')))
 app.use(fileUpload({}))
 app.use('/api', router)
 
-//Обработка ошибок, последний Middleware
+//Last Middleware
 app.use(errorHandler)
 
 const start = async () => {
@@ -40,16 +40,16 @@ const start = async () => {
 const swaggerOptions = {
     swaggerDefinition: {
         info: {
-            title: "Документация по нашему Test Store API",
-            description: 'API нашего тестового магазина',
+            title: "Documentation Test Store API",
+            description: 'API docs',
             termsOfService: 'https://example.com/terms/',
             contact: {
-                name: "Eugene Sychev",
+                name: "Admin Api",
                 url: "http://localhost:5000",
                 email: "support@example.com"
             },
             license: {
-                name: "Apache 2.0",
+                name: "Apache",
                 url: "https://www.apache.org/licenses/LICENSE-2.0.html"
             },
             version: "1.0.0",

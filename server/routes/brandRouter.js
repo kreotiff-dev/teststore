@@ -17,10 +17,10 @@ const checkRole = require("../middleware/checkRoleMiddleware")
  *              id:
  *                  type: integer
  *                  format: int64
- *                  description: id производителя
+ *                  description: id brand
  *              name:
  *                  type: string
- *                  description: Наименорвание производителя
+ *                  description: name brand
  *           example:
  *              id: 1102
  *              name: Vivo
@@ -34,19 +34,19 @@ const checkRole = require("../middleware/checkRoleMiddleware")
  * @swagger
  * /api/brand:
  *  post:
- *      descriptions: Используется для добавления нового брэнда
+ *      descriptions: Add new brand
  *      responses:
  *          '200':
- *              description: Успешное выполнение запроса
+ *              description: Success
  *              contents:
  *                  application/json:
  *                      schema:
  *                              $ref: '#/components/schemas/Brand'
  *  get:
- *      descriptions: Используется для получения списка всех брэндов
+ *      descriptions: Get All brands
  *      responses:
  *          '200':
- *              description: Успешное выполнение запроса
+ *              description: Success
  *
  */
 router.post('/', checkRole('ADMIN'), brandController.create)
