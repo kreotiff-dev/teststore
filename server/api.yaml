@@ -1,0 +1,91 @@
+openapi: "3.0.2"
+servers:
+  - url: http://localhost:5000/
+info:
+  title: API Documentation
+  description: This is my test-store API Documentation
+  version: 0.1.0
+  contact:
+    name: API support
+    email: mail@example.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+tags:
+  - name: brand
+    description: All about Brands
+  - name: device
+    description: All about devices
+  - name: type
+    description: All about types
+  - name: user
+    description: Operations about user
+paths:
+   /api/brand:
+     post:
+       tags:
+         - brand
+       summary: Return
+       description: "Return somebody"
+       operationId: addBrand
+       parameters:
+         - name: name
+           in: query
+           description: name brand
+           required: false
+       responses:
+         '200':
+           description: OK
+           content:
+             application/json:
+               schema:
+                 $ref: '#/components/schemas/Brand'
+             application/xml:
+               schema:
+                 $ref: '#/components/schemas/Brand'
+         '401':
+           description: Вероятно вы не авторизованы
+           content:
+             application/json:
+               example: 'message: Не авторизован'
+             application/xml:
+               schema:
+                 example: 'message: Не авторизован'
+         '405':
+           description: Invalid input
+       requestBody:
+         description: Create a new brand in the store
+         required: true
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/Brand'
+           application/xml:
+             schema:
+               $ref: '#/components/schemas/Brand'
+
+
+
+components:
+  schemas:
+    Brand:
+      type: object
+      required:
+        - name
+        - id
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: Sony
+        updatedAt:
+          type: string
+          format: date-time
+          example: 2022-06-30T17:36:59.924Z
+        createdAt:
+          type: string
+          format: date-time
+          example: 2022-06-30T17:36:59.924Z
